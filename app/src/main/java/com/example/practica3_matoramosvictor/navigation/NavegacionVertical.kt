@@ -18,12 +18,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.practica3_matoramosvictor.R
 
 @Composable
-fun NavegacionVerticalF(modifier: Modifier = Modifier) {
+fun NavegacionVerticalF(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     NavigationRail(
         modifier = modifier.padding(start = 8.dp, end = 8.dp),
         containerColor = MaterialTheme.colorScheme.background
@@ -43,8 +46,8 @@ fun NavegacionVerticalF(modifier: Modifier = Modifier) {
                 label = {
                     Text(stringResource(R.string.inicio))
                 },
-                selected = true,
-                onClick = {}
+                selected = false,
+                onClick = { navController.navigate(route = AppScreens.FirstScreen.route)}
             )
             Spacer(modifier = Modifier.height(8.dp))
             NavigationRailItem(
@@ -55,17 +58,11 @@ fun NavegacionVerticalF(modifier: Modifier = Modifier) {
                     )
                 },
                 label = {
-                    Text(stringResource(R.string.perfil))
+                    Text(stringResource(R.string.segundaPantalla))
                 },
                 selected = false,
-                onClick = {}
+                onClick = {navController.navigate(route = AppScreens.ButtonScreen.route)}
             )
         }
     }
-}
-
-@Preview(widthDp = 640, heightDp = 360)
-@Composable
-fun NavegacionVerticalPreview() {
-    NavegacionVerticalF()
 }
