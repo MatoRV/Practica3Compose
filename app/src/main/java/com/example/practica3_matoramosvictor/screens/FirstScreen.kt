@@ -42,23 +42,7 @@ import com.example.practica3_matoramosvictor.view.DescubrirElementosF
 import com.example.practica3_matoramosvictor.view.HotelesEuropaF
 import com.example.practica3_matoramosvictor.view.SearchBarF
 
-/*
-@Composable
-fun DescubrirFilas(
-    modifier: Modifier = Modifier
-) {
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
-        modifier = modifier
-    ) {
-        items(descubrirData) {item ->
-            DescubrirElementosF(item.drawable, item.text)
-        }
-    }
-}
 
- */
 @Composable
 fun DescubrirFilas(
     modifier: Modifier = Modifier
