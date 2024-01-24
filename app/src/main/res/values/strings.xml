@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Practica3-MatoRamosVictor</string>
+    <string name="busqueda">Buscar</string>
+    <string name="d01_habitacion_vitality">Habitación Vitality</string>
+    <string name="d02_programa_vitality">Programación Vitality Estado físico</string>
+    <string name="d03_alimentos_y_bebidas">Alimentos y bebidas vitality</string>
+    <string name="d04_reuniones_vitality">Reuniones de Vitality</string>
+    <string name="d05_excelencia_comercialÇ_planeta">Excelencia comercial planeta</string>
+    <string name="d06_excelencia_comercial_personas">Excelencia comercial personas</string>
+    <string name="d07_excelencia_comercial_informes">Excelencia comercial informes</string>
+    <string name="d08_organizaciones_beneficas">Organizaciones benéficas</string>
+    <string name="d09_diseno">Diseño</string>
+    <string name="d10_tradicion_viva">Tradición viva</string>
+    <string name="d11_autenticidad">Autenticidad</string>
+    <string name="d12_artesania">Artesania</string>
+    <string name="h01_sarajevo">Swissôtel Sarajevo</string>
+    <string name="h02_the_bosphorus">Swissôtel The Bosphorus</string>
+    <string name="h03_tallinn">Swissôtel Tallinn</string>
+    <string name="h04_izmir">Swissôtel Izmir</string>
+    <string name="h05_amsterdam">Swissôtel Amsterdam</string>
+    <string name="h06_resort_bodrum">Swissôtel Resort Bodrum Beach</string>
+    <string name="h07_kursaal_bern">Swissôtel Kursaal Bern</string>
+    <string name="descubrir">Descubrir</string>
+    <string name="hoteles_europa">Hoteles Europa</string>
+    <string name="inicio">Inicio</string>
+</resources>
