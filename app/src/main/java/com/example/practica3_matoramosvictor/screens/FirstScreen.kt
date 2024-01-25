@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -92,7 +93,7 @@ fun HotelesEuropaGrid(
     LazyVerticalGrid(
         columns = GridCells.Fixed(1),
         contentPadding = PaddingValues(8.dp),
-        modifier = modifier.height(250.dp),
+        modifier = modifier.height(350.dp).fillMaxHeight(),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(hotelesEuropaData) { item ->
@@ -144,7 +145,6 @@ fun HomeScreen(
     Column(
         modifier.verticalScroll(rememberScrollState())
     ) {
-        Spacer(Modifier.height(16.dp))
         SearchBarF(Modifier.padding(horizontal = 16.dp))
         HomeSection(title = R.string.descubrir) {
             DescubrirFilas()
