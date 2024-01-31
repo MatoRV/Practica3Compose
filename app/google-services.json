@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "86661235447",
+    "project_id": "hotel-matorv",
+    "storage_bucket": "hotel-matorv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86661235447:android:c3eb38b5ba42e8d9f749f2",
+        "android_client_info": {
+          "package_name": "com.example.practica3_matoramosvictor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKFHJ0v35Oc9wcMT-ah69br5zUp-ITwIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

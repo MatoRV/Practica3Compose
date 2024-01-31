@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    // Añade los servicios de Google al Gradle
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -50,7 +52,12 @@ android {
 }
 
 dependencies {
-    
+
+    // BoM de Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+
+    // Dependencia de autenticación de firebase
+    implementation("com.google.firebase:firebase-auth")
 
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation("androidx.core:core-ktx:1.12.0")
