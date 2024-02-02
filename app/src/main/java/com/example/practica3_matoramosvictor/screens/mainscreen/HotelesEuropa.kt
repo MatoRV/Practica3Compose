@@ -1,4 +1,4 @@
-package com.example.practica3_matoramosvictor.view
+package com.example.practica3_matoramosvictor.screens.mainscreen
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

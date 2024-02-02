@@ -20,7 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.practica3_matoramosvictor.navigation.AppNavigation
 import com.example.practica3_matoramosvictor.navigation.Navegacion
 import com.example.practica3_matoramosvictor.navigation.NavegacionVerticalF
-import com.example.practica3_matoramosvictor.screens.HomeScreen
+import com.example.practica3_matoramosvictor.screens.mainscreen.HomeScreen
 import com.example.practica3_matoramosvictor.ui.theme.Practica3MatoRamosVictorTheme
 
 class MainActivity : ComponentActivity() {

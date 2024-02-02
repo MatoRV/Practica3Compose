@@ -1,4 +1,4 @@
-package com.example.practica3_matoramosvictor.view
+package com.example.practica3_matoramosvictor.screens.mainscreen
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
