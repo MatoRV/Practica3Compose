@@ -26,7 +26,7 @@ fun SecondScreen(
     LaunchedEffect(key1 = true) {
         delay(1000)
         navController.popBackStack()
-        navController.navigate(AppScreens.FirstScreen.route)
+        navController.navigate(AppScreens.LoginScreen.route)
     }
     Splash()
 }

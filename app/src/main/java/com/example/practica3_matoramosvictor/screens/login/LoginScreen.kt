@@ -1,5 +1,7 @@
 package com.example.practica3_matoramosvictor.screens.login
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +25,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,12 +37,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -47,16 +52,27 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.practica3_matoramosvictor.R
+import com.example.practica3_matoramosvictor.navigation.AppScreens
 import com.example.practica3_matoramosvictor.ui.theme.Practica3MatoRamosVictorTheme
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navController: NavController,
+    windowSizeClass: WindowSizeClass? = null
+) {
 
     val emailValue = rememberSaveable { mutableStateOf("") }
     val passwordValue = rememberSaveable { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
+    val context: Context = LocalContext.current
+
 
     Box(
         modifier = Modifier
@@ -120,6 +136,7 @@ fun LoginScreen() {
                             TransparentTextField(
                                 textFieldValue = emailValue,
                                 textLabel = "Email",
+                                keyboardType = KeyboardType.Email,
                                 keyboardActions = KeyboardActions(
                                     onNext = {
                                         focusManager.moveFocus(FocusDirection.Down)
@@ -131,6 +148,7 @@ fun LoginScreen() {
                             TransparentTextField(
                                 textFieldValue = passwordValue,
                                 textLabel = "Contraseña",
+                                keyboardType = KeyboardType.Password,
                                 keyboardActions = KeyboardActions(
                                     onDone = {
                                         focusManager.clearFocus()
@@ -177,7 +195,35 @@ fun LoginScreen() {
                                 text = "Iniciar Sesión",
                                 displayProgressBar = false,
                                 onClick = {
-                                    // TODO("LOGIN")
+                                    var auth: FirebaseAuth = Firebase.auth
+
+                                    // Para verificar que los campos no están vacíos
+                                    if (emailValue.value.isBlank() || passwordValue.value.isBlank()) {
+                                        Toast.makeText(
+                                            context,
+                                            "Ingrese correo o contraseña válidos",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+
+                                    // Log In
+                                    auth.signInWithEmailAndPassword(emailValue.value, passwordValue.value)
+                                        .addOnCompleteListener { task ->
+                                            if (task.isSuccessful) {
+                                                navController.navigate(AppScreens.FirstScreen.route)
+                                                Toast.makeText(
+                                                    context,
+                                                    "Ha iniciado sesión con éxito",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            } else {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Ha fallado la auteticación",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        }
                                 }
                             )
                             ClickableText(
@@ -192,10 +238,11 @@ fun LoginScreen() {
                                         append("  ")
                                         append("Registrarse")
                                     }
+                                },
+                                onClick = {
+                                    navController.navigate(AppScreens.RegisterScreen.route)
                                 }
-                            ) {
-                                // TODO("NAVEGA A LA PANTALLA DE REGISTRO")
-                            }
+                            )
                         }
                     }
                 }
@@ -220,12 +267,11 @@ fun LoginScreen() {
         }
     }
 }
-
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun LoginScreenPreview() {
     Practica3MatoRamosVictorTheme {
-        LoginScreen()
+        LoginScreen(navController = rememberNavController())
     }
 }
 

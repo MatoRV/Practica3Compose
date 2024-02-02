@@ -7,6 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.practica3_matoramosvictor.screens.ButtonScreen
 import com.example.practica3_matoramosvictor.screens.SecondScreen
+import com.example.practica3_matoramosvictor.screens.login.LoginScreen
+import com.example.practica3_matoramosvictor.screens.register.RegistrationScreen
 import com.example.practica3_matoramosvictor.view.MySootheApp
 
 @Composable
@@ -23,6 +25,12 @@ fun AppNavigation(
         }
         composable(route = AppScreens.ButtonScreen.route) {
             ButtonScreen(navController, windowSizeClass )
+        }
+        composable(route = AppScreens.LoginScreen.route) {
+            LoginScreen(navController, windowSizeClass)
+        }
+        composable(route = AppScreens.RegisterScreen.route) {
+            RegistrationScreen(navController, windowSizeClass)
         }
     }
 }

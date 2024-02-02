@@ -1,6 +1,9 @@
 package com.example.practica3_matoramosvictor.screens.register
 
-import android.graphics.drawable.Icon
+import android.content.Context
+import android.nfc.Tag
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +28,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,23 +38,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.practica3_matoramosvictor.navigation.AppScreens
 import com.example.practica3_matoramosvictor.screens.login.RoundedButton
 import com.example.practica3_matoramosvictor.screens.login.TransparentTextField
 import com.example.practica3_matoramosvictor.ui.theme.Practica3MatoRamosVictorTheme
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 @Composable
-fun RegistrationScreen() {
+fun RegistrationScreen(
+    navController: NavController,
+    windowSizeClass: WindowSizeClass? = null
+) {
 
     val nameValue = remember { mutableStateOf("") }
     val emailValue = remember { mutableStateOf("") }
@@ -62,6 +77,8 @@ fun RegistrationScreen() {
     var confirmPasswordVisibility by remember { mutableStateOf(false) }
 
     val focusManager = LocalFocusManager.current
+
+    val context: Context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -78,7 +95,9 @@ fun RegistrationScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        navController.navigate(AppScreens.LoginScreen.route)
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
@@ -105,6 +124,7 @@ fun RegistrationScreen() {
                 TransparentTextField(
                     textFieldValue = nameValue,
                     textLabel = "Nombre",
+                    keyboardType = KeyboardType.Text,
                     keyboardActions = KeyboardActions(
                         onNext = {
                             focusManager.moveFocus(FocusDirection.Down)
@@ -116,6 +136,7 @@ fun RegistrationScreen() {
                 TransparentTextField(
                     textFieldValue = emailValue,
                     textLabel = "Email",
+                    keyboardType = KeyboardType.Email,
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
                     ),
@@ -125,6 +146,7 @@ fun RegistrationScreen() {
                 TransparentTextField(
                     textFieldValue = phoneValue,
                     textLabel = "Teléfono",
+                    keyboardType = KeyboardType.Phone,
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
                     ),
@@ -134,6 +156,7 @@ fun RegistrationScreen() {
                 TransparentTextField(
                     textFieldValue = passwordValue,
                     textLabel = "Contraseña",
+                    keyboardType = KeyboardType.Password,
                     keyboardActions = KeyboardActions(
                         onNext = {focusManager.moveFocus(FocusDirection.Down)}
                     ),
@@ -156,6 +179,7 @@ fun RegistrationScreen() {
                 TransparentTextField(
                     textFieldValue = confirmPasswordValue,
                     textLabel = "Confirmar contraseña",
+                    keyboardType = KeyboardType.Password,
                     keyboardActions = KeyboardActions(
                         onDone = { focusManager.clearFocus() }
                     ),
@@ -179,7 +203,37 @@ fun RegistrationScreen() {
                     text = "Registrarse",
                     displayProgressBar = false,
                     onClick = {
-                        // TODO("REGISTER")
+                        var auth: FirebaseAuth = Firebase.auth
+
+                        // Para verificar que los campos no están vacíos
+                        if (emailValue.value.isBlank() || passwordValue.value.isBlank()) {
+                            Toast.makeText(
+                                context,
+                                "Ingrese correo o contraseña válidos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        // Registro de correo y contraseña
+                        auth.createUserWithEmailAndPassword(emailValue.value, passwordValue.value)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Toast.makeText(
+                                        context,
+                                        "Registrado con éxito",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    navController.navigate(AppScreens.LoginScreen.route)
+                                } else {
+
+
+                                    Toast.makeText(
+                                        context,
+                                        "${task.exception?.localizedMessage}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
                     }
                 )
 
@@ -198,7 +252,7 @@ fun RegistrationScreen() {
                         }
                     },
                     onClick = {
-                        // TODO("BACK")
+                        navController.navigate(AppScreens.LoginScreen.route)
                     }
                 )
             }
@@ -255,13 +309,25 @@ fun RegistrationScreen() {
             ) {
                 SocialMediaButton(
                     text = "Facebook",
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                              Toast.makeText(
+                                  context,
+                                  "No disponible por el momento",
+                                  Toast.LENGTH_SHORT
+                              ).show()
+                    },
                     socialMediaColor = Color.Blue
                 )
 
                 SocialMediaButton(
                     text = "Gmail",
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        Toast.makeText(
+                            context,
+                            "No disponible por el momento",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    },
                     socialMediaColor = Color.Red
                 )
             }
@@ -273,6 +339,6 @@ fun RegistrationScreen() {
 @Composable
 fun RegistrationScreenPreview() {
     Practica3MatoRamosVictorTheme {
-        RegistrationScreen()
+        RegistrationScreen(navController = rememberNavController())
     }
 }

@@ -3,6 +3,7 @@ package com.example.practica3_matoramosvictor.screens.login
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
@@ -20,6 +22,7 @@ fun TransparentTextField(
     textLabel: String,
     maxChar: Int? = null,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.None,
+    keyboardType: KeyboardType,
     keyboardActions: KeyboardActions,
     imeAction: ImeAction,
     traillingIcon: @Composable() (() -> Unit)? = null,
@@ -35,6 +38,11 @@ fun TransparentTextField(
             Text(text = textLabel)
         },
         trailingIcon = traillingIcon,
+        keyboardOptions = KeyboardOptions(
+            capitalization = capitalization,
+            keyboardType = keyboardType,
+            imeAction = imeAction
+        ),
         keyboardActions = keyboardActions,
         visualTransformation = visualTransformation,
     )
