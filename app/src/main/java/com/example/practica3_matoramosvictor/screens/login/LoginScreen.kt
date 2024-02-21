@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -195,7 +196,7 @@ fun LoginScreen(
                                 text = "Iniciar Sesión",
                                 displayProgressBar = false,
                                 onClick = {
-                                    var auth: FirebaseAuth = Firebase.auth
+                                    val auth: FirebaseAuth = Firebase.auth
 
                                     // Para verificar que los campos no están vacíos
                                     if (emailValue.value.isBlank() || passwordValue.value.isBlank()) {
@@ -258,7 +259,7 @@ fun LoginScreen(
                 ) {
                     Icon(
                         modifier = Modifier.size(42.dp),
-                        imageVector = Icons.Default.ArrowForward,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                         contentDescription = "Forward Icon",
                         tint = Color.White
                     )

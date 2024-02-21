@@ -1,8 +1,6 @@
 package com.example.practica3_matoramosvictor.screens.register
 
 import android.content.Context
-import android.nfc.Tag
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,10 +18,10 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -100,7 +98,7 @@ fun RegistrationScreen(
                     }
                 ) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back Icon",
                         tint = MaterialTheme.colorScheme.primary
                     )
@@ -267,7 +265,7 @@ fun RegistrationScreen(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Divider(
+                    HorizontalDivider(
                         modifier = Modifier.width(24.dp),
                         thickness = 1.dp,
                         color = Color.Gray
@@ -281,7 +279,7 @@ fun RegistrationScreen(
                         )
                     )
 
-                    Divider(
+                    HorizontalDivider(
                         modifier = Modifier.width(24.dp),
                         thickness = 1.dp,
                         color = Color.Gray

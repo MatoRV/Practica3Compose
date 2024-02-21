@@ -2,6 +2,7 @@ package com.example.practica3_matoramosvictor.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoStories
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Icon
@@ -51,6 +52,21 @@ fun Navegacion(
             },
             label = {
                 Text(stringResource(R.string.segundaPantalla))
+            },
+            selected = false,
+            onClick = {
+                navController.navigate(route = AppScreens.ButtonScreen.route)
+            }
+        )
+        NavigationBarItem(
+            icon = {
+                   Icon(
+                       imageVector = Icons.Default.AutoStories,
+                       contentDescription = null
+                   )
+            },
+            label = {
+                Text(stringResource(R.string.reserva))
             },
             selected = false,
             onClick = {

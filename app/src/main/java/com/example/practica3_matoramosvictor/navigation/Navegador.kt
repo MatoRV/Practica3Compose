@@ -9,6 +9,7 @@ import com.example.practica3_matoramosvictor.screens.ButtonScreen
 import com.example.practica3_matoramosvictor.screens.SecondScreen
 import com.example.practica3_matoramosvictor.screens.login.LoginScreen
 import com.example.practica3_matoramosvictor.screens.register.RegistrationScreen
+import com.example.practica3_matoramosvictor.screens.reserva.ReservaScreen
 import com.example.practica3_matoramosvictor.view.MySootheApp
 
 @Composable
@@ -31,6 +32,9 @@ fun AppNavigation(
         }
         composable(route = AppScreens.RegisterScreen.route) {
             RegistrationScreen(navController, windowSizeClass)
+        }
+        composable(route = AppScreens.ReservaScreen.route) {
+            ReservaScreen(navController, windowSizeClass)
         }
     }
 }
