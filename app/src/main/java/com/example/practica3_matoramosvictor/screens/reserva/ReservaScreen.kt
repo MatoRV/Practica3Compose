@@ -142,7 +142,7 @@ fun ReservaScreen(
                 Button(
                     onClick = { showDialog = true }
                 ) {
-                    Text(text = "Mostrar fecha")
+                    Text(text = "Seleccionar fecha")
                 }
                 if (showDialog) {
                     DatePickerDialog(
@@ -164,6 +164,7 @@ fun ReservaScreen(
                         Instant.ofEpochMilli(it).atZone(ZoneId.of("UTC")).toLocalDate()
                     fecha = "${localDate.dayOfMonth}/${localDate.monthValue}/${localDate.year}"
                 }
+                Text(text = "Fecha selecionada: $fecha")
                 TransparentTextField(
                     textFieldValue = hora,
                     textLabel = "Hora",
