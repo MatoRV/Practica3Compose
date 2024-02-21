@@ -1,8 +1,12 @@
 package com.example.practica3_matoramosvictor.screens.reserva
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -34,68 +38,71 @@ fun ReservaScreen(
     windowSizeClass: WindowSizeClass? = null,
     viewModel: ReservaViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    var nombre by remember {
-        mutableStateOf("")
-    }
-    var numeroPersonas by remember {
-        mutableStateOf("")
-    }
-    var hora by remember {
-        mutableStateOf("")
-    }
+    var nombre by remember { mutableStateOf("") }
+    var numeroPersonas by remember { mutableStateOf("") }
+    var hora by remember { mutableStateOf("") }
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        IconButton(
-            onClick = {
-                navController.navigate(AppScreens.FirstScreen.route)
-            }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back Icon",
-                tint = MaterialTheme.colorScheme.primary
+            IconButton(
+                onClick = {
+                    navController.navigate(AppScreens.FirstScreen.route)
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back Icon",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            Text(
+                text = "Reserva Restaurante",
+                style = MaterialTheme.typography.headlineMedium.copy(
+                    color = MaterialTheme.colorScheme.primary
+                )
             )
         }
 
-        Text(
-            text = "Reserva Restaurante",
-            style = MaterialTheme.typography.headlineMedium.copy(
-                color = MaterialTheme.colorScheme.primary
-            )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            content = {
+                OutlinedTextField(
+                    value = nombre,
+                    onValueChange = {nombre = it},
+                    label = { Text(text = "Nombre")}
+                )
+                OutlinedTextField(
+                    value = numeroPersonas,
+                    onValueChange = {numeroPersonas = it},
+                    label = { Text(text = "Número de Personas")}
+                )
+                OutlinedTextField(
+                    value = hora,
+                    onValueChange = {hora = it},
+                    label = { Text(text = "Fecha y hora")}
+                )
+                Button(
+                    onClick = {
+                        val reserva = DataReserva(nombre,numeroPersonas.toInt(),hora)
+                        viewModel.subirReserva(reserva)
+                    },
+                    modifier = Modifier.padding(top = 16.dp)
+                ) {
+                    Text(text = "Reservar")
+                }
+            }
         )
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        content = {
-            OutlinedTextField(
-                value = nombre,
-                onValueChange = {nombre = it},
-                label = { Text(text = "Nombre")}
-            )
-            OutlinedTextField(
-                value = numeroPersonas,
-                onValueChange = {numeroPersonas = it},
-                label = { Text(text = "Número de Personas")}
-            )
-            OutlinedTextField(
-                value = hora,
-                onValueChange = {hora = it},
-                label = { Text(text = "Fecha y hora")}
-            )
-            Button(
-                onClick = {
-                    val reserva = DataReserva(nombre,numeroPersonas.toInt(),hora)
-                    viewModel.subirReserva(reserva)
-                },
-                modifier = Modifier.padding(top = 16.dp)
-            ) {
-                Text(text = "Reservar")
-            }
-        }
-    )
 }
 
 @Preview

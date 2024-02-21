@@ -70,7 +70,7 @@ fun Navegacion(
             },
             selected = false,
             onClick = {
-                navController.navigate(route = AppScreens.ButtonScreen.route)
+                navController.navigate(route = AppScreens.ReservaScreen.route)
             }
         )
     }
